@@ -1,7 +1,31 @@
 $(document).ready(function(){
-
+  $('#popup-close').click(function () {
+    $('#error-message-popup').hide();// hides alert with Bootstrap CSS3 implem
+  });
 
 });
+
+
+
+//Function to convert formdata to JS Object
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+
+
 
 function hotel_enquiry(){
   var name = $('#hotel_name');
@@ -11,37 +35,35 @@ function hotel_enquiry(){
   var to_date = $('#hotel_to_date');
 
   if (name.hasClass("error") || email.hasClass("error") || contact.hasClass("error") || from_date.hasClass("error") || to_date.hasClass("error")) {
-    alert('Please Check the Validations')
+    $('#error-message-popup').show();
   }
   else {
-    var base_url = $('#base_url').val();
-    $.ajax({
-      method:'POST',
-      async:false,
-      url:base_url+'index.php/Home/hotel_booking',
-      data:$('#hotel_form').serialize(),
+    jQuery.ajax({
+      type: "POST",
+      url: ajax_obj.ajaxurl,
+      data: {
+        action : 'insert_hotel',
+        form_data : $('#hotel_form').serializeObject()
+      },
       dataType:'JSON',
-      context:this,
       success:function(res){
-        alert(res);
-        //alert(res.first_mail.successmsg);
-        //alert(res.second_mail.successmsg2);
+        alert(res['response_result']);
+        document.getElementById("hotel_form").reset(); 
         $('#myModalsuccess').modal('show');
       },
       error:function(res){
-        $('#myModalfailure').modal('show');
-        //alert("Failed");
+        document.getElementById("hotel_form").reset();
+        $('#myModalfailure').modal('show'); 
       },
       beforeSend:function(){
         $('.msg-animation').css('display','block');
       },
       complete:function(){
+        document.getElementById("hotel_form").reset(); 
         $('.msg-animation').css('display','none');
       }
     });
   }
-
-
 }
 
 
@@ -54,31 +76,31 @@ function car_enquiry(){
   var to_date = $('#car_to_date');
 
   if (name.hasClass("error") || email.hasClass("error") || contact.hasClass("error") || email.hasClass("error") || from_date.hasClass("error") || to_date.hasClass("error")) {
-    alert('Please Check the Validations');
+    $('#error-message-popup').show();
   }
   else {
-    var base_url = $('#base_url').val();
-    $.ajax({
-      method:'POST',
-      async:false,
-      url:base_url+'index.php/Home/car_booking',
-      data:$('#hotel_form').serialize(),
+    jQuery.ajax({
+      type: "POST",
+      url: ajax_obj.ajaxurl,
+      data: {
+        action : 'insert_car',
+        form_data : $('#car_form').serializeObject()
+      },
       dataType:'JSON',
-      context:this,
       success:function(res){
-        alert(res);
-        //alert(res.first_mail.successmsg);
-        //alert(res.second_mail.successmsg2);
+        alert(res['response_result']);
+        document.getElementById("car_form").reset(); 
         $('#myModalsuccess').modal('show');
       },
       error:function(res){
-        $('#myModalfailure').modal('show');
-        //alert("Failed");
+        document.getElementById("car_form").reset();
+        $('#myModalfailure').modal('show'); 
       },
       beforeSend:function(){
         $('.msg-animation').css('display','block');
       },
       complete:function(){
+        document.getElementById("car_form").reset(); 
         $('.msg-animation').css('display','none');
       }
     });
@@ -94,31 +116,31 @@ function water_enquiry(){
   var contact = $('#water_contact');
 
   if (name.hasClass("error") || email.hasClass("error") || contact.hasClass("error")) {
-    alert('Please Check the Validations');
+    $('#error-message-popup').show();
   }
   else {
-    var base_url = $('#base_url').val();
-    $.ajax({
-      method:'POST',
-      async:false,
-      url:base_url+'index.php/Home/water_booking',
-      data:$('#hotel_form').serialize(),
+    jQuery.ajax({
+      type: "POST",
+      url: ajax_obj.ajaxurl,
+      data: {
+        action : 'insert_watersports',
+        form_data : $('#water_sports_form').serializeObject()
+      },
       dataType:'JSON',
-      context:this,
       success:function(res){
-        alert(res);
-        //alert(res.first_mail.successmsg);
-        //alert(res.second_mail.successmsg2);
+        alert(res['response_result']);
+        document.getElementById("water_sports_form").reset(); 
         $('#myModalsuccess').modal('show');
       },
       error:function(res){
-        $('#myModalfailure').modal('show');
-        //alert("Failed");
+        document.getElementById("water_sports_form").reset();
+        $('#myModalfailure').modal('show'); 
       },
       beforeSend:function(){
         $('.msg-animation').css('display','block');
       },
       complete:function(){
+        document.getElementById("water_sports_form").reset(); 
         $('.msg-animation').css('display','none');
       }
     });
@@ -129,35 +151,34 @@ function contact_us(){
   var name = $('#contactus_name');
   var lname = $('#contactus_lname_name');
   var email = $('#contactus_email');
-  var subject = $('#contactus_subject');
   var message = $('#contactus_message');
 
-  if (name.hasClass("error") || email.hasClass("error") || email.hasClass("error") || subject.hasClass("error") || message.hasClass("error")) {
-    alert('Please Check the Validations');
+  if (name.hasClass("error") || lname.hasClass("error") || email.hasClass("error") || message.hasClass("error")) {
+    $('#error-message-popup').show();
   }
   else {
-    var base_url = $('#base_url').val();
-    $.ajax({
-      method:'POST',
-      async:false,
-      url:base_url+'index.php/Contact/contact_mail',
-      data:$('#contact_form').serialize(),
+    jQuery.ajax({
+      type: "POST",
+      url: ajax_obj.ajaxurl,
+      data: {
+        action : 'contact_mail',
+        form_data : $('#contact_form').serializeObject()
+      },
       dataType:'JSON',
-      context:this,
       success:function(res){
-        alert(res);
-        //alert(res.first_mail.successmsg);
-        //alert(res.second_mail.successmsg2);
+        alert(res['response_result']);
+        document.getElementById("contact_form").reset(); 
         $('#myModalsuccess').modal('show');
       },
       error:function(res){
-        $('#myModalfailure').modal('show');
-        //alert("Failed");
+        document.getElementById("contact_form").reset();
+        $('#myModalfailure').modal('show'); 
       },
       beforeSend:function(){
         $('.msg-animation').css('display','block');
       },
       complete:function(){
+        document.getElementById("contact_form").reset(); 
         $('.msg-animation').css('display','none');
       }
     });

@@ -64,9 +64,12 @@ add_action('wp_enqueue_scripts', 'load_stylesheets');
 
 
 function loadjs(){
+
+    wp_deregister_script('jquery');//WP ships with Jquery hence deregister it and load our
+
     //Jquery
-    // wp_register_script('jquery', get_template_directory_uri() . '/assets/js/jquery.min.js',array(),1,1,1);
-    // wp_enqueue_script('jquery'); 
+    wp_register_script('jquery', get_template_directory_uri() . '/assets/js/jquery.min.js',array(),1,1,1);
+    wp_enqueue_script('jquery'); 
 
     //Modernizr JS
     wp_register_script('modernizr', get_template_directory_uri() . '/assets/js/modernizr-2.6.2.min.js',array('jquery'),1,1,1);
@@ -117,10 +120,6 @@ function loadjs(){
     wp_register_script('mainjs', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), 1,1,1);
     wp_enqueue_script('mainjs');
 
-    //custom
-    wp_register_script('customjs', get_template_directory_uri() . '/assets/js/custom.js', array('jquery'), 1,1,1);
-    wp_enqueue_script('customjs');
-
     //classie
     wp_register_script('classie', get_template_directory_uri() . '/assets/js/image_gallery/classie.js', array('jquery'), 1,1,1);
     wp_enqueue_script('classie');
@@ -128,8 +127,265 @@ function loadjs(){
     //photostack
     wp_register_script('photostack', get_template_directory_uri() . '/assets/js/image_gallery/photostack.js', array('jquery'), 1,1,1);
     wp_enqueue_script('photostack');
-}
+
+    //custom
+    wp_register_script('customjs', get_template_directory_uri() . '/assets/js/custom.js', array('jquery'));
+    wp_enqueue_script( 'customjs' );
+
+    //Required for AJAX calls in wordpress
+    wp_localize_script('customjs', 'ajax_obj', array('ajaxurl' =>admin_url('admin-ajax.php')));
+
+} 
 add_action( 'wp_enqueue_scripts', 'loadjs' );
+
+
+//adding a menu in appearance tab of wordpress
+add_theme_support('menus');
+//Register Menu
+register_nav_menus(
+    array(
+        'top-menu' => __('Main Menu','theme'),
+    )
+);
+
+
+//Ajax PHP function insert hotel enquiry
+function insert_hotel(){
+    $form_data = $_POST['form_data'];
+    $name = $form_data['hotel_name'];
+    $email = $form_data['hotel_email'];
+    $phone = $form_data['hotel_contact'];
+    $from_date = $form_data['hotel_from_date'];
+    $to_date = $form_data['hotel_to_date'];
+    $persons = $form_data['hotel_people'];
+
+    global $wpdb;//WP Database name
+    //Get Enquiry Type ID
+    $result = $wpdb->get_results("SELECT enq_type_id FROM wp_enquiry_type WHERE enquiry_name = 'hotel'");
+    $enq_type_id = $result[0]->enq_type_id; 
+
+    //Insert into hotel enquiry table
+    $table_name = $wpdb->prefix . "hotel_enquiry";
+    $wpdb->insert( $table_name, array(
+        'name' => $name,
+        'email' => $email,
+        'contact' => $phone,
+        'check_in' => date("Y-m-d", strtotime($from_date)),
+        'check_out' => date("Y-m-d", strtotime($to_date)),
+        'guest' => (int)$persons
+        )
+    );
+    $hotel_enq_id = $wpdb->insert_id;
+    //Insert into enquiries table
+    $table_name = $wpdb->prefix . "enquiries";
+    $wpdb->insert( $table_name, array(
+        'type_id' => $enq_type_id,
+        'ref_id' => $hotel_enq_id
+        )
+    );
+    //For Debugging Errors
+    $wpdb->last_error;$wpdb->print_error;$wpdb->last_query;
+
+    //Send Email to Customer
+    $to = $email;
+    $subject = 'Incredible Tarkarli Hotel Enquiry Response';
+    $body = file_get_contents(get_template_directory_uri(). 'my_email_template.php');
+    $headers = array('Content-Type: text/html; charset=UTF-8','From: Incredible Tarkarli Toursim <info@incredibletarkarli.com>');
+    $mail_sent = false;
+    $first_email = wp_mail( $to, $subject, $body, $headers );
+
+    if($first_email){
+        $mail_sent = true;
+        //Send Email to IncredibleTarkarli Admin
+        $to = "info@incredibletarkarli.com";
+        $subject = 'Incredible Tarkarli Hotel Enquiry -' + $hotel_enq_id;
+        $body = "Name : ".$name."<br />".
+                "Email : ".$email."<br />".
+                "Phone : ".$phone."<br />".
+                "From Date : ".$from_date."<br />".
+                "Till Date : ".$to_date."<br />".
+                "No.of Persons : ".$persons;
+        $headers = array('Content-Type: text/html; charset=UTF-8','From: Incredible Tarkarli Toursim <info@incredibletarkarli.com>');
+        $second_email = wp_mail( $to, $subject, $body, $headers );
+        $second_email ? $mail_sent = true : $mail_sent = false;
+
+    }
+
+    echo json_encode(array("response_result"=> $mail_sent));
+    die();
+}
+
+function insert_car(){
+    $form_data = $_POST['form_data'];
+    $name = $form_data['car_name'];
+    $email = $form_data['car_email'];
+    $phone = $form_data['car_contact'];
+    $from_date = $form_data['car_from_date'];
+    $to_date = $form_data['car_to_date'];
+
+    global $wpdb;//WP Database name
+    //Get Enquiry Type ID
+    $result = $wpdb->get_results("SELECT enq_type_id FROM wp_enquiry_type WHERE enquiry_name = 'car'");
+    $enq_type_id = $result[0]->enq_type_id; 
+
+    //Insert into hotel enquiry table
+    $table_name = $wpdb->prefix . "car_enquiry";
+    $wpdb->insert( $table_name, array(
+        'name' => $name,
+        'email' => $email,
+        'contact' => $phone,
+        'start_date' => date("Y-m-d", strtotime($from_date)),
+        'return_date' => date("Y-m-d", strtotime($to_date))
+        )
+    );
+    $car_enq_id = $wpdb->insert_id;
+    //Insert into enquiries table
+    $table_name = $wpdb->prefix . "enquiries";
+    $wpdb->insert( $table_name, array(
+        'type_id' => $enq_type_id,
+        'ref_id' => $car_enq_id
+        )
+    );
+    //For Debugging Errors
+    $wpdb->last_error;$wpdb->print_error;$wpdb->last_query;
+
+    //Send Email to Customer
+    $to = $email;
+    $subject = 'Incredible Tarkarli Car/Bike Rent Enquiry Response';
+    $body = file_get_contents(get_template_directory_uri(). 'my_email_template.php');
+    $headers = array('Content-Type: text/html; charset=UTF-8','From: Incredible Tarkarli Toursim <info@incredibletarkarli.com>');
+    $mail_sent = false;
+    $first_email = wp_mail( $to, $subject, $body, $headers );
+
+    if($first_email){
+        $mail_sent = true;
+        //Send Email to IncredibleTarkarli Admin
+        $to = "info@incredibletarkarli.com";
+        $subject = 'Incredible Tarkarli Car/Bike Rent Enquiry -' + $car_enq_id;
+        $body = "Name : ".$name."<br />".
+                "Email : ".$email."<br />".
+                "Phone : ".$phone."<br />".
+                "From Date : ".$from_date."<br />".
+                "Till Date : ".$to_date."<br />";
+        $headers = array('Content-Type: text/html; charset=UTF-8','From: Incredible Tarkarli Toursim <info@incredibletarkarli.com>');
+        $second_email = wp_mail( $to, $subject, $body, $headers );
+        $second_email ? $mail_sent = true : $mail_sent = false;
+
+    }
+
+    echo json_encode(array("response_result"=> $mail_sent));
+    die();
+}
+
+function insert_watersports(){
+    $form_data = $_POST['form_data'];
+    $name = $form_data['water_name'];
+    $email = $form_data['water_email'];
+    $phone = $form_data['water_contact'];
+    $water_date = $form_data['water_date'];
+    $people = $form_data['water_people'];
+
+    global $wpdb;//WP Database name
+    //Get Enquiry Type ID
+    $result = $wpdb->get_results("SELECT enq_type_id FROM wp_enquiry_type WHERE enquiry_name = 'water sports'");
+    $enq_type_id = $result[0]->enq_type_id; 
+
+
+    //Insert into hotel enquiry table
+    $table_name = $wpdb->prefix . "water_enquiry";
+
+    $wpdb->insert( $table_name, array(
+        'enquiry_name' => $name,
+        'email' => $email,
+        'contact' => $phone,
+        'date' => date("Y-m-d", strtotime($water_date)),
+        'peoples' => (int)$people
+        )
+    );
+    $water_enq_id = $wpdb->insert_id;
+    //Insert into enquiries table
+    $table_name = $wpdb->prefix . "enquiries";
+    $wpdb->insert( $table_name, array(
+        'type_id' => $enq_type_id,
+        'ref_id' => $water_enq_id
+        )
+    );
+    //For Debugging Errors
+    echo $wpdb->last_error;$wpdb->print_error;$wpdb->last_query;
+
+    //Send Email to Customer
+    $to = $email;
+    $subject = 'Incredible Tarkarli Water Sports Enquiry Response';
+    $body = file_get_contents(get_template_directory_uri(). 'my_email_template.php');
+    $headers = array('Content-Type: text/html; charset=UTF-8','From: Incredible Tarkarli Toursim <info@incredibletarkarli.com>');
+    $mail_sent = false;
+    $first_email = wp_mail( $to, $subject, $body, $headers );
+
+    if($first_email){
+        $mail_sent = true;
+        //Send Email to IncredibleTarkarli Admin
+        $to = "info@incredibletarkarli.com";
+        $subject = 'Incredible Tarkarli Water Sports Enquiry -' + $water_enq_id;
+        $body = "Name : ".$name."<br />".
+                "Email : ".$email."<br />".
+                "Phone : ".$phone."<br />".
+                "On Date : ".$water_date."<br />".
+                "People : ".$people."<br />";
+        $headers = array('Content-Type: text/html; charset=UTF-8','From: Incredible Tarkarli Toursim <info@incredibletarkarli.com>');
+        $second_email = wp_mail( $to, $subject, $body, $headers );
+        $second_email ? $mail_sent = true : $mail_sent = false;
+
+    }
+
+
+    echo json_encode(array("response_result"=> $mail_sent));
+    die();
+}
+
+function contact_mail(){
+    $form_data = $_POST['form_data'];
+    $name = $form_data['contactus_name'];
+    $lname = $form_data['contactus_lname_name'];
+    $email = $form_data['contactus_email'];
+    $subject = $form_data['contactus_subject'];
+    $message = $form_data['contactus_message'];
+
+    //Send Email to Customer
+    $to = $email;
+    $subject = 'Incredible Tarkarli Enquiry Response';
+    $body = file_get_contents(get_template_directory_uri(). 'my_email_template.php');
+    $headers = array('Content-Type: text/html; charset=UTF-8','From: Incredible Tarkarli Toursim <info@incredibletarkarli.com>');
+    $mail_sent = false;
+    $first_email = wp_mail( $to, $subject, $body, $headers );
+
+    if($first_email){
+        $mail_sent = true;
+        //Send Email to IncredibleTarkarli Admin
+        $to = "info@incredibletarkarli.com";
+        $subject = 'Incredible Tarkarli Contact Us Enquiry ';
+        $body = "Name : ".$name." ".$lname ."<br />".
+                "Email : ".$email."<br />".
+                "subject : ".$subject."<br />".
+                "Message : ".$message."<br />";
+        $headers = array('Content-Type: text/html; charset=UTF-8','From: Incredible Tarkarli Toursim <info@incredibletarkarli.com>',);
+        $second_email = wp_mail( $to, $subject, $body, $headers );
+        $second_email ? $mail_sent = true : $mail_sent = false;
+
+    }
+
+    echo json_encode(array("response_result"=> $mail_sent));
+    die();
+}
+
+//Hooking AJAX Functions
+add_action('wp_ajax_insert_hotel', 'insert_hotel');//hotel enquiry
+add_action('wp_ajax_nopriv_insert_hotel', 'insert_hotel');//hotel enquiry
+add_action('wp_ajax_insert_car', 'insert_car');//car enquiry
+add_action('wp_ajax_nopriv_insert_car', 'insert_car');//car enquiry
+add_action('wp_ajax_insert_watersports', 'insert_watersports');//Water enquiry
+add_action('wp_ajax_nopriv_insert_watersports', 'insert_watersports');//Water enquiry
+add_action('wp_ajax_contact_mail', 'contact_mail');//Contact Us enquiry
+add_action('wp_ajax_nopriv_contact_mail', 'contact_mail');//Contact Us enquiry
 
 
 ?>
