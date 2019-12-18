@@ -290,7 +290,7 @@ function insert_watersports(){
     $result = $wpdb->get_results("SELECT enq_type_id FROM wp_enquiry_type WHERE enquiry_name = 'water sports'");
     $enq_type_id = $result[0]->enq_type_id; 
 
-
+ 
     //Insert into hotel enquiry table
     $table_name = $wpdb->prefix . "water_enquiry";
 
@@ -387,6 +387,15 @@ add_action('wp_ajax_nopriv_insert_watersports', 'insert_watersports');//Water en
 add_action('wp_ajax_contact_mail', 'contact_mail');//Contact Us enquiry
 add_action('wp_ajax_nopriv_contact_mail', 'contact_mail');//Contact Us enquiry
 
+add_filter('nav_menu_css_class' , 'special_nav_class' , 10 , 2);
 
-?>
+
+//Toggle Active classes for dynamic menu active class
+function special_nav_class ($classes, $item) {
+  if (in_array('current-menu-item', $classes) ){
+    $classes[] = 'active ';
+  }
+  return $classes;
+}
+
 

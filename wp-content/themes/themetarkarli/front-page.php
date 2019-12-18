@@ -411,7 +411,7 @@ $slider_data = get_field('slider');
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
 							<div class="slider-text-inner text-center">
-								<h2 class="slider-headers" style="color: #ffdd00;">Explore best tavel agency in Tarkarli</h2>
+								<h2 class="slider-headers" style="color: #ffdd00;">Explore best travel agency in Tarkarli</h2>
 								<h1 class="slider-headers" style="color: #ffdd00;">Incredible Tarkarli Tourism</h1>
 							</div>
 						</div>
@@ -945,9 +945,8 @@ $slider_data = get_field('slider');
 									<img class="img-responsive" src="<?php bloginfo('template_directory'); ?>/assets/images/home/best-beach-hotels-water-sports-and-deals-in-tarkarli.png" alt="best beach hotels water sports and deals in tarkarli" title="best beach hotels water sports and deals in tarkarli">
 								</div>
 								<div class="col-md-7">
-									<h1>Best Deals in Tarkarli Malvan.</h1>
-									<!-- <p>Nunc accumsan hendrerit nunc, ac venenatis magna facilisis quis. Ut sit amet mi ac <br /> neque sodales facilisis. Nullam tempus fermentum lorem nec interdum. Ut id <br /> orci id sapien imperdiet vehicula. Etiam quis dignissim ante. Donec convallis tincidunt <br /> ligula, ac luctus mi interdum a.</p> -->
-									<p>We break out of established patterns to make our customers happy.<br /><br />We give crazy discount on hotel bookings, bike rentals, water sports in Tarkarli.<br /> </p>
+									<h1>Best Hotels and Beach Resorts in Tarkarli.</h1>
+									<p>We break out of established patterns to make our customers happy.<br /><br />We give crazy discount on hotels and beach resorts bookings in Tarkarli.<br /> </p>
 								</div>
 							</div>
 							<div class="tab-pane edit-tab" id="professional">
@@ -956,7 +955,7 @@ $slider_data = get_field('slider');
 								</div>
 								<div class="col-md-7 col-sm-6 col-xs-12">
 									<h1>We Are Competent In Water Sports.</h1>
-									<p>We take security very seriously and and provide best security for water sports in Tarkarli.<br><br /> We are committed to the highest standards of professionalism and quality. We give best Scuba Diving,Parasailing,Water bike,Snorkeling deals in Tarkarli. With our certified scuba professionals we give best experience and security to our customers</p>
+									<p>We take security very seriously and and provide best security for water sports in Tarkarli.<br><br /> We are committed to the highest standards of professionalism and quality. We give best water sports package which includes Scuba Diving,Parasailing,Water bike,Snorkeling deals in Tarkarli and with our certified scuba professionals we give best experience and safety to our customers</p>
 								</div>
 							</div>
 							<div class="tab-pane edit-tab" id="experienced">
@@ -1748,16 +1747,16 @@ $slider_data = get_field('slider');
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box fadeInUp animated-fast" style="margin-bottom: 0px;">
 			<h2>Our Services</h2>
-			<p>We love to tell our successful far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+			<p>We offer wide range of services to our customers which leads to best vacation experience</p>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
 			<hr>
 			<div class="media wow fadeInRight">
-				<h3>Hotels</h3>
+				<h3>Hotels and Beach Resorts</h3>
 				<div class="media-body media-middle">
-					<p>What could be easier? Get started fast with this landing page starter theme.What could be easier? Get started fast with this landing page starter theme.</p>
+					<p>Our hotels are best in Tarkarli which are loaded with all types of ammenities like wifi, parking, water sports and many more. Our sea facing beach resorts fills the heart of our customers.</p>
 				</div>
 				<div class="media-right">
 					<img style="width:100px;" src="<?php bloginfo('template_directory'); ?>/assets/images/home/hotels-tarkarli.svg" alt="hotels tarkarli" title="hotels tarkarli"/>
@@ -1771,14 +1770,14 @@ $slider_data = get_field('slider');
 					<img style="width:100px;" src="<?php bloginfo('template_directory'); ?>/assets/images/home/tarkarli-beach.svg" alt="tarkarli beach" title="tarkarli beach"/>
 				</div>
 				<div class="media-body media-middle">
-					<p>Yes, please. Grab it for yourself, and make something awesome with this.What could be easier? Get started fast with this landing page starter theme.</p>
+					<p>We consider the privacy of our customers and we provide private beaches for our customers. We also arrange beach parties and games for more enjoyments. Explore beaches in Tarkarli with the help of our guide.</p>
 				</div>
 			</div>
 			<hr>
 			<div class="media wow fadeInRight">
-				<h3>Bike on Rent</h3>
+				<h3>Bike Rent</h3>
 				<div class="media-body media-middle">
-					<p>Because you don't want your Bootstrap site, to look like a Bootstrap site.What could be easier? Get started fast with this landing page starter theme.</p>
+					<p>With our bike and car rents our customers like to enjoy the bike rides and trips in Tarkarli. Our bike rentals are cheapest in Tarkarli with minimum deposits, Ride this beautiful place with your loved once.</p>
 				</div>
 				<div class="media-right">
 					<img style="width:100px;" src="<?php bloginfo('template_directory'); ?>/assets/images/home/bike-rent-tarkarli-beach.svg" alt="bike rent tarkarli beach" title="bike rent tarkarli beach"/>
@@ -1791,14 +1790,14 @@ $slider_data = get_field('slider');
 					<img style="width:100px;" src="<?php bloginfo('template_directory'); ?>/assets/images/home/water-sports-banana-ride-tarkarli.svg" alt="water sports banana ride tarkarli" title="water sports banana ride tarkarli"/>
 				</div>
 				<div class="media-body media-middle">
-					<p>There's good reason why Bootstrap is the most used frontend framework in the world.What could be easier? Get started fast with this landing page starter theme.</p>
+					<p>We have range of water packages available for our customers. According to customer needs we provide affordable water sports entertainments like Scuba Diving, Deep Diving, Snorkeling, Banana Ride and many more.</p>
 				</div>
 			</div>
 			<hr>
 			<div class="media wow fadeInRight">
 				<h3>Sight Seeing</h3>
 				<div class="media-body media-middle">
-					<p>We know each corner of Malvan and Tarkarli. We make sure our customers don't miss any place to visit. We offer Sight seeing like Sindhudurg Fort,Rock Garden, Devbagh, Lighthouse etc.</p>
+					<p>We know each corner of Malvan and Tarkarli. We make sure our customers don't miss any place to visit. We offer Sight seeing like Sindhudurg Fort,Rock Garden, Devbagh, Lighthouse and many more.</p>
 				</div>
 				<div class="media-right">
 					<img src="<?php bloginfo('template_directory'); ?>/assets/images/home/tarkarli-beaches-hotels.svg" alt="tarkarli beaches and hotels" title="tarkarli beaches and hotels"/>
@@ -2200,8 +2199,8 @@ $slider_data = get_field('slider');
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box">
-				<h2>Popular Destination in Malvan</h2>
-				<p>Explore the best destinations in Malvan, which will make you go crazy. Experience the beauty of the nature in Malvan. Witness the history of Malvan.</p>
+				<h2>Popular Destinations in Tarkarli</h2>
+				<p>Explore the best destinations in Tarkarli, which will make you go crazy. Experience the beauty of the nature and witness the culture and the history of Tarkarli.</p>
 			</div>
 		</div>
 	</div>
@@ -2358,8 +2357,8 @@ $slider_data = get_field('slider');
 							</div>
 						</div>
 						<div class="text-rights">
-							<h3 class="title">Just hurry up limited offer!</h3>
-							<p>Only first 10 customers will avail this wonderfull Discount offer, don't miss the best deal in Tarkarli</p>
+							<h3 class="title">Just hurry up limited offer for Trekking!</h3>
+							<p>Only first 10 customers will avail this wonderfull Discount offer, don't miss the best deal. Don't forget to check our trekking video.</p>
 							<p><a href="#" class="btn btn-primary">Book Now</a>
 						</div>
 					</div>
@@ -2368,7 +2367,7 @@ $slider_data = get_field('slider');
 			<div class="col-md-6 animate-box">
 				<div class="video-wrap">
 					<div class="video colorlib-video" style="background-image: url(<?php bloginfo('template_directory'); ?>/assets/images/home/beach-tarkarli.jpg);" alt="tarkarli beach" title="tarkarli beach">
-						<a href="https://www.youtube.com/watch?v=RNVeWHPXQ0U" class="popup-vimeo"><i class="icon-video"></i></a>
+						<a href="https://www.youtube.com/watch?v=V7qjbGnReEk" class="popup-vimeo"><i class="icon-video"></i></a>
 						<div class="video-overlay"></div>
 					</div>
 				</div>
@@ -2382,7 +2381,7 @@ $slider_data = get_field('slider');
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3 text-center colorlib-heading animate-box">
 				<h2>Our Recommended Hotels</h2>
-				<p>We always recommend best to our customers. There are thousands of hotels available in Malvan Tarkarli but we will always recommend best to our customers with all the facilities.</p>
+				<p>We always recommend best to our customers. There are many of hotels and beach resorts available in Tarkarli but we will always recommend best to our customers with all the facilities.</p>
 			</div>
 		</div>
 		<div class="row">

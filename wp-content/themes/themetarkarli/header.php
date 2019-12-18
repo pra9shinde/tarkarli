@@ -5,11 +5,51 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+	<!--SEO Meta Content-->
+	<?php 
+		// finds the last URL segment  
+		$urlArray = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+		$segments = explode('/', $urlArray);
+		$numSegments = count($segments); 
+		$currentSegment = $segments[$numSegments - 2];
+		if($currentSegment === 'about-tarkarli'):
+	?>
+			<meta name="title" content="Incredible Tarkarli - Best Hotels, Beach Resorts and Beaches in Tarkarli" />
+			<meta name="description" content="Tarkarli - A destination present at Konkan Coastal Area. Find the beaches, temples, fort in tarkarli. Know the history and the culture of your destination - Tarkarli" />
+			<meta name="keywords" content="tarkarli, temples, fort, tarkarli beach, hotels tarkarli, tarkarli hotels, tarkarli beaches, tarkarli beach resort, banana ride, water sports, mtdc tarkarli, scuba diving, underwater diving, hotel reservation, online hotel booking, cheap hotels, beach, malvan, incredibletarkarli India" />
+			<link rel="revision" href="<?php echo 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?>" />
+	<?php	
+		elseif($currentSegment === 'services'):
+	?>
+		<meta name="title" content="Incredible Tarkarli - Best Hotels, Beach Resorts and Beaches in Tarkarli" />
+		<meta name="description" content="Find best deals and packages for hotels, beach resorts, Water sports, bike rents, car rents, scuba diving, deep diving, snorekling, snoorkling in Tarkarli" />
+		<meta name="keywords" content="tarkarli, temples, fort, tarkarli beach, hotels tarkarli, tarkarli hotels, tarkarli beaches, tarkarli beach resort, banana ride, water sports, mtdc tarkarli, scuba diving, underwater diving, hotel reservation, online hotel booking, cheap hotels, beach, malvan, incredibletarkarli India" />
+		<link rel="revision" href="<?php echo 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?>" />
+	<?php	
+		elseif($currentSegment === 'about-us'):
+	?>
+		<meta name="title" content="Incredible Tarkarli - Best Hotels, Beach Resorts and Beaches in Tarkarli" />
+		<meta name="description" content="IncredibleTarkarli is a toursim in Tarkarli which provides best hotels, water sports, beach resorts, bike rents in Tarkarli with cheap and affordable rates " />
+		<meta name="keywords" content="tarkarli, temples, fort, tarkarli beach, hotels tarkarli, tarkarli hotels, tarkarli beaches, tarkarli beach resort, banana ride, water sports, mtdc tarkarli, scuba diving, underwater diving, hotel reservation, online hotel booking, cheap hotels, beach, malvan, incredibletarkarli India" />
+		<link rel="revision" href="<?php echo 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?>" />
+	<?php	
+		elseif($currentSegment === 'contact-us'):
+	?>
+		<meta name="title" content="Incredible Tarkarli - Best Hotels, Beach Resorts and Beaches in Tarkarli" />
+		<meta name="description" content="Contact Incredible tarkarli toursim - the best toursim for booking hotels, beach resorts, rooms, water sports in Tarkarli. Amazing offers, discounts and affordable cheap rates on bookings" />
+		<meta name="keywords" content="tarkarli, temples, fort, tarkarli beach, hotels tarkarli, tarkarli hotels, tarkarli beaches, tarkarli beach resort, banana ride, water sports, mtdc tarkarli, scuba diving, underwater diving, hotel reservation, online hotel booking, cheap hotels, beach, malvan, incredibletarkarli India" />
+		<link rel="revision" href="<?php echo 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?>" />
+	<?php	
+		else:
+	?>
 	<meta name="title" content="Incredible Tarkarli - Best Hotels, Beach Resorts and Beaches in Tarkarli" />
 	<meta name="description" content="Looking for Online Hotels or Beaches or Beach Resorts in Tarkarli? FREE Cancellation, Book @Rs.1 online hotel bookings at Tarkarli. Book cheap, budget and luxury hotels or beach resorts at best price from leading hotel booking site in tarkarli." />
 	<meta name="keywords" content="tarkarli, hotels tarkarli, tarkarli hotels, tarkarli beaches, tarkarli beach resort, banana ride, water sports, mtdc tarkarli, scuba diving, underwater diving, hotel reservation, online hotel booking, cheap hotels, beach, malvan, incredibletarkarli India" />
 	<link rel="revision" href="<?php echo 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?>" />
-
+	<?php
+		endif;
+	?>
+	<!--SEO Meta Content Ends-->
 
 	<title>Incredible Tarkarli - Best Hotels, Beach Resorts and Beaches in Tarkarli</title>
 	<link rel="shortcut icon" href="<?php bloginfo('template_directory'); ?>/assets/images/favicon.ico" type="image/x-icon">

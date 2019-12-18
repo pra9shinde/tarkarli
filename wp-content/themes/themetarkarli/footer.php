@@ -449,7 +449,7 @@
             <li><a href="#">Hotels in Tarkarli</a></li>
             <li><a href="#">Car Rent in Tarkarli</a></li>
             <li><a href="#">Bike rent in Tarkarli</a></li>
-            <li><a href="#">Beach &amp; Resorts</a></li>
+            <li><a href="#">Tarkarli Beach Resorts</a></li>
             <li><a href="#">Water Sports in Tarkarli</a></li>
           </ul>
         </p>
@@ -463,7 +463,7 @@
             <li><a href="<?php echo home_url(); ?>">Hotels</a></li>
             <li><a href="<?php echo home_url(); ?>/services/">Services</a></li>
             <li><a href="<?php echo home_url(); ?>/about-us/">About us</a></li>
-            <li><a href="<?php echo home_url(); ?>/contact-us/">contact</a></li>
+            <li><a href="<?php echo home_url(); ?>/contact-us/">Contact</a></li>
           </ul>
         </p>
       </div>
@@ -498,10 +498,49 @@
   <a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
 </div>
 
+<!-- Load Facebook SDK for JavaScript -->
+<style>
+    .fb_dialog.fb_dialog_advanced {
+      right: 18pt;
+      margin-right: -10px;
+      margin-bottom: 60px;
+  }
+  iframe.fb_customer_chat_bounce_in_v2 {
+      right: 9pt;
+      margin-right: -10px;
+      margin-bottom: 60px;
+  }
+  iframe.fb_customer_chat_bounce_out_v2 {
+      right: 9pt;
+      margin-right: -10px;
+      margin-bottom: 60px;
+  }
+</style>
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      xfbml            : true,
+      version          : 'v5.0'
+    });
+  };
 
-<div class="fb-customerchat" page_id="1523512977956820">
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+  fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- Your customer chat code -->
+<div class="fb-customerchat"
+  attribution=setup_tool
+  page_id="602687096824361"
+theme_color="#ffdd00"
+logged_in_greeting="Hi! You can enquire right now!!"
+logged_out_greeting="Hi! You can enquire right now!!">
 </div>
-
 
 <!-- jQuery -->
 
@@ -532,30 +571,6 @@
   });
 </script>
 
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId: '1079109992297136',
-      autoLogAppEvents: true,
-      xfbml: true,
-      version: 'v2.11'
-    });
-  };
-
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {
-      return;
-    }
-    js = d.createElement(s);
-    js.id = id;
-    //js.src = "https://connect.facebook.net/en_US/sdk.js";
-    js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
-
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
 
 </body>
 
